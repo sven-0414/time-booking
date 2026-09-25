@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtuella miljöer
+.venv/
+venv/
+
+# Miljövariabler
+.env
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
