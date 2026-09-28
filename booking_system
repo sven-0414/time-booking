@@ -1,0 +1,25 @@
+import datetime
+
+from booking import Booking
+from resource import LockerRoom, Rink
+from customer import Customer
+
+
+class BookingSystem:
+    def __init__(self):
+        self.customers = []
+        self.rinks = []
+        self.locker_rooms = []
+        self.bookings = []
+
+    def create_booking(
+        self,
+        customer: Customer,
+        rink: Rink,
+        locker_room: LockerRoom,
+        start: datetime,
+        duration: int,
+    ):
+        booking = Booking(customer, rink, locker_room, start, duration)
+        self.bookings.append(booking)
+        return booking
