@@ -1,3 +1,6 @@
+from datetime import timedelta
+
+
 class Resource:
     """Object for bookable resources"""
 
@@ -10,3 +13,19 @@ class Resource:
 
     def __str__(self) -> str:
         return self.name
+
+
+class Rink(Resource):
+    """An ice rink. Occupied exactly during the booked time."""
+
+    RESURFACE_MINUTES = 10
+
+
+class LockerRoom(Resource):
+    """Object for locker rooms"""
+
+    def occupied_period(self, start, end):
+        buffer = timedelta(minutes=30)
+        occupied_start = start - buffer
+        occupied_end = end + buffer
+        return occupied_start, occupied_end
