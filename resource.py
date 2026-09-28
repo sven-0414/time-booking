@@ -16,7 +16,7 @@ class Resource:
 
 
 class Rink(Resource):
-    """An ice rink. Occupied exactly during the booked time."""
+    """An ice rink. Occupied exactly during the booked time. Last 10 minutes is used for resurficing."""
 
     RESURFACE_MINUTES = 10
 
