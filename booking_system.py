@@ -1,7 +1,7 @@
-import datetime
+from datetime import datetime
 
 from booking import Booking
-from resource import LockerRoom, Rink
+from resources import LockerRoom, Rink
 from customer import Customer
 
 
@@ -38,6 +38,21 @@ class BookingSystem:
 
         return True
 
+        def add_rink(self, name):
+        rink = Rink(name)
+        self.rinks.append(rink)
+        return rink
+
+    def add_locker_room(self, name):
+        locker_room = LockerRoom(name)
+        self.locker_rooms.append(locker_room)
+        return locker_room
+
+    def add_customer(self, name):
+        customer = Customer(name)
+        self.customers.append(customer)
+        return customer
+    
     def cancel_booking(self, booking_id):
         """Remove the booking with the given id."""
         for booking in self.bookings:
