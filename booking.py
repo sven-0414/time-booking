@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from customer import Customer
-from resource import LockerRoom, Rink
+from resources import LockerRoom, Rink
 
 
 class Booking:
@@ -23,7 +23,14 @@ class Booking:
         self.locker_room = locker_room
         self.start = time
         self.end = time + timedelta(minutes=duration)
+        if duration not in Booking.ALLOWED_DURATIONS:
+            raise ValueError(
+                f"Duration must be one of {Booking.ALLOWED_DURATIONS} minutes."
+            )
+        self.customer = customer
         self.duration = duration
+        self.id = Booking._next_id
+        Booking._next_id += 1
 
     def __str__(self) -> str:
         return (
