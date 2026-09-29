@@ -5,7 +5,7 @@ class Customer:
 
     def __init__(self, name: str):
         name = name.strip()
-        if len(name) <= 5:
+        if len(name) < 5:
             raise ValueError("Name must be five characters or more.")
         self.name = name
         self.id = Customer._next_id
