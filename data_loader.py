@@ -18,8 +18,7 @@ def create_system():
     backen = system.add_customer("Bäcken HC")
     gkk = system.add_customer("Göteborgs Konståkningsklubb")
 
-    system.create_booking(frolunda, big_rink, datetime(2026, 10, 5, 16, 0), 90)
-    system.create_booking(backen, big_rink, datetime(2026, 10, 5, 17, 30), 60)
-    system.create_booking(gkk, small_rink, datetime(2026, 10, 5, 17, 30), 90)
-
+    system.create_booking(frolunda, big_rink, datetime(2026, 10, 5, 16, 0), duration=90)
+    system.create_booking(backen, big_rink, datetime(2026, 10, 5, 17, 30), duration=60)
+    system.create_booking(gkk, small_rink, datetime(2026, 10, 5, 17, 30), duration=90)
     return system

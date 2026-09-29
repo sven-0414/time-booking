@@ -32,6 +32,50 @@ def book(system):
         print(f"Could not book: {error}")
 
 
+def add_customer(system):
+    name = input("Customer name: ")
+    try:
+        customer = system.add_customer(name)
+        print(f"Added: {customer}")
+    except ValueError as error:
+        print(f"Could not add customer: {error}")
+
+
+def list_customers(system):
+    if not system.customers:
+        print("No customers yet.")
+        return
+    for customer in system.customers:
+        print(customer)
+
+
+def choose_rink(system):
+    for number, rink in enumerate(system.rinks, start=1):
+        print(f"{number}. {rink}")
+    while True:
+        choice = ask_int("Rink: ")
+        if 1 <= choice <= len(system.rinks):
+            return system.rinks[choice - 1]
+        print("Invalid rink.")
+
+
+def cancel(system):
+    booking_id = ask_int("Booking id: ")
+    try:
+        booking = system.cancel_booking(booking_id)
+        print(f"Cancelled: {booking}")
+    except ValueError as error:
+        print(f"Could not cancel: {error}")
+
+
+def list_bookings(system):
+    if not system.bookings:
+        print("No bookings yet.")
+        return
+    for booking in sorted(system.bookings, key=lambda booking: booking.start):
+        print(booking)
+
+
 def main():
     system = create_system()
     while True:
