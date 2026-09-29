@@ -1,8 +1,6 @@
 from datetime import datetime
 
 from booking_system import BookingSystem
-from customer import Customer
-from resources import LockerRoom, Rink
 
 
 def create_system():
