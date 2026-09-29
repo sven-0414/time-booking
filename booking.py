@@ -18,16 +18,15 @@ class Booking:
         time: datetime,
         duration: int,
     ):
-        self.customer = customer
-        self.rink = rink
-        self.locker_room = locker_room
-        self.start = time
-        self.end = time + timedelta(minutes=duration)
         if duration not in Booking.ALLOWED_DURATIONS:
             raise ValueError(
                 f"Duration must be one of {Booking.ALLOWED_DURATIONS} minutes."
             )
         self.customer = customer
+        self.rink = rink
+        self.locker_room = locker_room
+        self.start = time
+        self.end = time + timedelta(minutes=duration)
         self.duration = duration
         self.id = Booking._next_id
         Booking._next_id += 1
