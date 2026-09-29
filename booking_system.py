@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from booking import Booking
 from resources import LockerRoom, Rink
@@ -16,10 +16,13 @@ class BookingSystem:
         self,
         customer: Customer,
         rink: Rink,
-        locker_room: LockerRoom,
         start: datetime,
         duration: int,
     ):
+        end = start + timedelta(minutes=duration)
+        if not self.is_available(rink, start, end):
+            raise ValueError("The rink is already booked at that time.")
+        locker_room = self.find_free_locker_room(start, end)
         booking = Booking(customer, rink, locker_room, start, duration)
         self.bookings.append(booking)
         return booking
@@ -38,7 +41,14 @@ class BookingSystem:
 
         return True
 
-        def add_rink(self, name):
+    def find_free_locker_room(self, start, end):
+        """Return the first locker room that is free from start to end."""
+        for locker_room in self.locker_rooms:
+            if self.is_available(locker_room, start, end):
+                return locker_room
+        raise ValueError("No locker room is available at that time.")
+
+    def add_rink(self, name):
         rink = Rink(name)
         self.rinks.append(rink)
         return rink
@@ -52,7 +62,7 @@ class BookingSystem:
         customer = Customer(name)
         self.customers.append(customer)
         return customer
-    
+
     def cancel_booking(self, booking_id):
         """Remove the booking with the given id."""
         for booking in self.bookings:
@@ -60,3 +70,9 @@ class BookingSystem:
                 self.bookings.remove(booking)
                 return booking
         raise ValueError(f"No booking with id {booking_id}.")
+
+    def find_customer(self, customer_id):
+        for customer in self.customers:
+            if customer.id == customer_id:
+                return customer
+        raise ValueError(f"No customer with id {customer_id}.")
