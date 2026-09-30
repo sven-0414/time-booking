@@ -19,9 +19,16 @@ class Resource:
 
 
 class Rink(Resource):
-    """An ice rink. Occupied exactly during the booked time. Last 10 minutes is used for resurfacing."""
+    """An ice rink. Occupied exactly during the booked time; the last
+    10 minutes of the booking are used to resurface the ice."""
 
     RESURFACE_MINUTES = 10
+
+    def resurface_notice(self) -> str:
+        return (
+            f"Note: the last {Rink.RESURFACE_MINUTES} minutes of the "
+            f"booking are used to resurface the ice."
+        )
 
 
 class LockerRoom(Resource):
