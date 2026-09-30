@@ -8,7 +8,7 @@ def ask_int(prompt):
         answer = input(prompt).strip()
         if answer.isdigit():
             return int(answer)
-        print("Please enter a choice.")
+        print("Please choose a number: ")
 
 
 def ask_datetime(prompt):
@@ -22,13 +22,19 @@ def ask_datetime(prompt):
 
 def book(system):
     customer_id = ask_int("Customer id: ")
+    try:
+        customer = system.find_customer(customer_id)
+    except ValueError as error:
+        print(f"Could not book: {error}")
+        return
+
     rink = choose_rink(system)
     start = ask_datetime("Start (YYYY-MM-DD HH:MM): ")
     duration = ask_int("Duration in minutes (60, 90 or 120): ")
     try:
-        customer = system.find_customer(customer_id)
         booking = system.create_booking(customer, rink, start, duration)
         print(f"Booked: {booking}")
+        # ... din resurface_notice-rad ligger kvar här om du lagt den
     except ValueError as error:
         print(f"Could not book: {error}")
 
