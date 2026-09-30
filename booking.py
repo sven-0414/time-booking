@@ -10,18 +10,15 @@ class Booking:
     ALLOWED_DURATIONS = (60, 90, 120)
     _next_id = 1
 
-    def __init__(
-        self,
-        customer: Customer,
-        rink: Rink,
-        locker_room: LockerRoom,
-        time: datetime,
-        duration: int,
-    ):
+    @staticmethod
+    def validate_duration(duration: int) -> None:
         if duration not in Booking.ALLOWED_DURATIONS:
             raise ValueError(
                 f"Duration must be one of {Booking.ALLOWED_DURATIONS} minutes."
             )
+
+    def __init__(self, customer, rink, locker_room, time, duration):
+        Booking.validate_duration(duration)
         self.customer = customer
         self.rink = rink
         self.locker_room = locker_room
