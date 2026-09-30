@@ -12,23 +12,21 @@ class BookingSystem:
         self.locker_rooms = []
         self.bookings = []
 
-    def create_booking(
-        self,
-        customer: Customer,
-        rink: Rink,
-        start: datetime,
-        duration: int,
-    ):
+    def create_booking(self, customer, rink, start, duration):
         end = start + timedelta(minutes=duration)
-        if not self.is_available(rink, start, end):
-            raise ValueError("The rink is already booked at that time.")
+        conflict = self.find_conflict(rink, start, end)
+        if conflict is not None:
+            raise ValueError(
+                f"{rink} is already booked {conflict.start:%H:%M}-{conflict.end:%H:%M}."
+            )
         locker_room = self.find_free_locker_room(start, end)
         booking = Booking(customer, rink, locker_room, start, duration)
         self.bookings.append(booking)
         return booking
 
-    def is_available(self, resource, start, end):
-        """Return True if resource is free for a booking from start to end."""
+    def find_conflict(self, resource, start, end):
+        """Return the first booking that makes resource unavailable
+        from start to end, or None if the resource is free."""
         new_start, new_end = resource.occupied_period(start, end)
 
         for booking in self.bookings:
@@ -37,9 +35,13 @@ class BookingSystem:
                     booking.start, booking.end
                 )
                 if new_start < old_end and old_start < new_end:
-                    return False
+                    return booking
 
-        return True
+        return None
+
+    def is_available(self, resource, start, end):
+        """Return True if resource is free for a booking from start to end."""
+        return self.find_conflict(resource, start, end) is None
 
     def find_free_locker_room(self, start, end):
         """Return the first locker room that is free from start to end."""
