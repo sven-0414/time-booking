@@ -7,7 +7,7 @@ from resources import LockerRoom, Rink
 class Booking:
     """A booking of a rink and a locker room for a customer."""
 
-    ALLOWED_DURATIONS = (60, 90, 120)
+    ALLOWED_DURATIONS = (60, 90, 120, 240)
     _next_id = 1
 
     @staticmethod
