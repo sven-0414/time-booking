@@ -113,9 +113,7 @@ def main():
         print("3. Book")
         print("4. Cancel booking")
         print("5. List bookings")
-        print("5. List bookings")
         print("6. List a customer's bookings")
-        print("0. Quit")
         print("0. Quit")
         choice = input("Choose: ").strip()
 
