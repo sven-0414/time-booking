@@ -90,6 +90,21 @@ def list_bookings(system):
         print(booking)
 
 
+def list_customer_bookings(system):
+    customer_id = ask_int("Customer id: ")
+    try:
+        customer = system.find_customer(customer_id)
+    except ValueError as error:
+        print(error)
+        return
+    bookings = system.bookings_for_customer(customer)
+    if not bookings:
+        print(f"No bookings for {customer.name}.")
+        return
+    for booking in bookings:
+        print(booking)
+
+
 def main():
     system = create_system()
     while True:
@@ -98,6 +113,9 @@ def main():
         print("3. Book")
         print("4. Cancel booking")
         print("5. List bookings")
+        print("5. List bookings")
+        print("6. List a customer's bookings")
+        print("0. Quit")
         print("0. Quit")
         choice = input("Choose: ").strip()
 
@@ -111,6 +129,8 @@ def main():
             cancel(system)
         elif choice == "5":
             list_bookings(system)
+        elif choice == "6":
+            list_customer_bookings(system)
         elif choice == "0":
             break
         else:

@@ -81,3 +81,8 @@ class BookingSystem:
             if customer.id == customer_id:
                 return customer
         raise ValueError(f"No customer with id {customer_id}.")
+
+    def bookings_for_customer(self, customer):
+        """Return the given customer's bookings, earliest first."""
+        found = [b for b in self.bookings if b.customer is customer]
+        return sorted(found, key=lambda b: b.start)
