@@ -13,6 +13,8 @@ class BookingSystem:
         self.bookings = []
 
     def create_booking(self, customer, rink, start, duration):
+        if start < datetime.now():
+            raise ValueError("Cannot book a time in the past.")
         end = start + timedelta(minutes=duration)
         conflict = self.find_conflict(rink, start, end)
         if conflict is not None:
