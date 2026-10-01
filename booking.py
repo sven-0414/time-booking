@@ -1,7 +1,4 @@
-from datetime import datetime, timedelta
-
-from customer import Customer
-from resources import LockerRoom, Rink
+from datetime import timedelta
 
 
 class Booking:
