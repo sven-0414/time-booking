@@ -7,13 +7,13 @@ Customers book ice time on a rink. The system checks that the rink is free and a
 ## Features
 
 - Add and list customers
-- Book a rink for 60, 90 or 120 minutes
+- Book a rink for 60, 90, 120 or 240 minutes
 - Automatic assignment of a free locker room
 - Conflict checks for both rinks and locker rooms
 - Cancel bookings by id
 - List all bookings sorted by start time
 - Validation of names, dates, durations and menu input
-- Sample data (two rinks, six locker rooms, three customers and three bookings) loaded at start
+- Sample data (rinks, locker rooms, a few customers and bookings) loaded at start
 
 ## Requirements
 
@@ -41,5 +41,3 @@ Dates are entered as `YYYY-MM-DD HH:MM`, for example `2026-10-05 17:00`.
 | `resources.py` | `Resource` base class with `Rink` and `LockerRoom` |
 
 `Rink` and `LockerRoom` share the method `occupied_period`, but each returns its own period. The conflict check calls the same method for both, without knowing which type it is dealing with.
-
-The locker room rules are based on the City of Gothenburg's rules for booking ice arenas.
