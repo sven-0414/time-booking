@@ -1,9 +1,12 @@
+"""Command-line menu for the ice arena booking system."""
+
 from datetime import datetime
 
 from data_loader import create_system
 
 
 def ask_int(prompt):
+    """Prompt until the user enters a whole number, then return it as int."""
     while True:
         answer = input(prompt).strip()
         if answer.isdigit():
@@ -12,6 +15,7 @@ def ask_int(prompt):
 
 
 def ask_datetime(prompt):
+    """Prompt until the user enters a date and a time, then return it as datetime object."""
     while True:
         answer = input(prompt).strip()
         try:
@@ -21,6 +25,8 @@ def ask_datetime(prompt):
 
 
 def book(system):
+    """Run the booking dialog. The customer id is checked first, so an
+    unknown id fails before the rink, time and duration are asked for."""
     customer_id = ask_int("Customer id: ")
     try:
         customer = system.find_customer(customer_id)
@@ -30,11 +36,11 @@ def book(system):
 
     rink = choose_rink(system)
     start = ask_datetime("Start (YYYY-MM-DD HH:MM): ")
-    duration = ask_int("Duration in minutes (60, 90 or 120): ")
+    duration = ask_int("Duration in minutes (60, 90, 120 or 240): ")
     try:
         booking = system.create_booking(customer, rink, start, duration)
         print(f"Booked: {booking}")
-        # ... din resurface_notice-rad ligger kvar här om du lagt den
+
     except ValueError as error:
         print(f"Could not book: {error}")
 
