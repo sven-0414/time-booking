@@ -6,6 +6,9 @@ from customer import Customer
 
 
 class BookingSystem:
+    """Holds all customers, rinks, locker rooms and bookings, and the
+    operations that create, cancel and query them."""
+
     def __init__(self):
         self.customers = []
         self.rinks = []
@@ -13,6 +16,9 @@ class BookingSystem:
         self.bookings = []
 
     def create_booking(self, customer, rink, start, duration):
+        """Create and store a booking, assigning a free locker room.
+        Raises ValueError if the duration is invalid, the start is in the
+        past, the rink is already booked, or no locker room is free."""
         Booking.validate_duration(duration)
         if start < datetime.now():
             raise ValueError("Cannot book a time in the past.")

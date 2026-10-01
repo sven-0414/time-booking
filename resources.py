@@ -12,6 +12,9 @@ class Resource:
             raise ValueError("Name must be at least five characters.")
 
     def occupied_period(self, start, end):
+        """Return the period the resource is actually occupied for a booking
+        from start to end. The base resource is busy exactly that period;
+        subclasses may widen it."""
         return start, end
 
     def __str__(self) -> str:

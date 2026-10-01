@@ -9,11 +9,12 @@ Customers book ice time on a rink. The system checks that the rink is free and a
 - Add and list customers
 - Book a rink for 60, 90, 120 or 240 minutes
 - Automatic assignment of a free locker room
-- Conflict checks for both rinks and locker rooms
+- Conflict checks for both rinks and locker rooms, reporting the clashing rink and time
+- List all bookings, or one customer's bookings, sorted by start time
 - Cancel bookings by id
-- List all bookings sorted by start time
+- Rejects bookings in the past
 - Validation of names, dates, durations and menu input
-- Sample data (rinks, locker rooms, a few customers and bookings) loaded at start
+- Sample data loaded at start
 
 ## Requirements
 
