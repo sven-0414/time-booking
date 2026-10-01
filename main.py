@@ -40,6 +40,7 @@ def book(system):
     try:
         booking = system.create_booking(customer, rink, start, duration)
         print(f"Booked: {booking}")
+        print(booking.rink.resurface_notice())
 
     except ValueError as error:
         print(f"Could not book: {error}")
