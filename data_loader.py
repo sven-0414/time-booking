@@ -16,7 +16,7 @@ def create_system():
     backen = system.add_customer("Bäcken HC")
     gkk = system.add_customer("Göteborgs Konståkningsklubb")
 
-    first_wednesday = datetime(2026, 10, 7, 18, 0)
+    first_wednesday = datetime(2026, 10, 21, 18, 0)
     first_sunday = datetime(2026, 10, 18, 16, 0)
     for week in range(0, 12, 2):
         system.create_booking(
@@ -26,7 +26,7 @@ def create_system():
             backen, big_rink, first_sunday + timedelta(weeks=week), duration=240
         )
 
-    system.create_booking(frolunda, big_rink, datetime(2026, 10, 5, 16, 0), duration=90)
-    system.create_booking(backen, big_rink, datetime(2026, 10, 5, 17, 30), duration=60)
-    system.create_booking(gkk, small_rink, datetime(2026, 10, 5, 17, 30), duration=90)
+    system.create_booking(frolunda, big_rink, datetime(2026, 11, 5, 16, 0), duration=90)
+    system.create_booking(backen, big_rink, datetime(2026, 11, 5, 17, 30), duration=60)
+    system.create_booking(gkk, small_rink, datetime(2026, 11, 5, 17, 30), duration=90)
     return system
