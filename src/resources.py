@@ -2,14 +2,14 @@ from datetime import timedelta
 
 
 class Resource:
-    """Object for bookable resources"""
+    """Base class for bookable resources."""
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, id: int | None = None):
         name = name.strip()
-        if len(name) >= 5:
-            self.name = name
-        else:
+        if len(name) < 5:
             raise ValueError("Name must be at least five characters.")
+        self.name = name
+        self.id = id
 
     def occupied_period(self, start, end):
         """Return the period the resource is actually occupied for a booking
@@ -35,12 +35,10 @@ class Rink(Resource):
 
 
 class LockerRoom(Resource):
-    """Object for locker rooms"""
+    """A locker room. Occupied 30 minutes before and after the booking."""
 
     BUFFER_MINUTES = 30
 
     def occupied_period(self, start, end):
         buffer = timedelta(minutes=LockerRoom.BUFFER_MINUTES)
-        occupied_start = start - buffer
-        occupied_end = end + buffer
-        return occupied_start, occupied_end
+        return start - buffer, end + buffer
