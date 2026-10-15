@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 
-from booking import Booking
-from resources import LockerRoom, Rink
-from customer import Customer
+from src.booking import Booking
+from src.resources import LockerRoom, Rink
+from src.customer import Customer
 
 
 class BookingSystem:

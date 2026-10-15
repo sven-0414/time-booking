@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from booking_system import BookingSystem
+from src.booking_system import BookingSystem
 
 
 def create_system():

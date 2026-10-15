@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from data_loader import create_system
+from seed import create_system
 
 
 def ask_int(prompt):
